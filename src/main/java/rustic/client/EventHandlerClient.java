@@ -75,6 +75,10 @@ public class EventHandlerClient {
 			"rustic:textures/blocks/fluids/wildberry_juice_overlay.png");
 	public static ResourceLocation GRAPE_JUICE_OVERLAY = new ResourceLocation(
 			"rustic:textures/blocks/fluids/grape_juice_overlay.png");
+	public static ResourceLocation GRAPE_JUICE_OVERLAY_RED = new ResourceLocation(
+			"rustic:textures/blocks/fluids/grape_juice_overlay_red.png");
+	public static ResourceLocation GRAPE_JUICE_OVERLAY_GREEN = new ResourceLocation(
+			"rustic:textures/blocks/fluids/grape_juice_overlay_green.png");
 	public static ResourceLocation APPLE_JUICE_OVERLAY = new ResourceLocation(
 			"rustic:textures/blocks/fluids/apple_juice_overlay.png");
 	public static ResourceLocation ALE_WORT_OVERLAY = new ResourceLocation(
@@ -197,6 +201,18 @@ public class EventHandlerClient {
 				float brightness = player.getBrightnessForRender();
 				GlStateManager.color(brightness, brightness, brightness, 0.99F);
 				drawBlockOverlay(GRAPE_JUICE_OVERLAY);
+				GlStateManager.color(1, 1, 1, 1);
+			} else if (state.getBlock().equals(ModFluids.BLOCK_GRAPE_JUICE_RED)) {
+				event.setCanceled(true);
+				float brightness = player.getBrightnessForRender();
+				GlStateManager.color(brightness, brightness, brightness, 0.99F);
+				drawBlockOverlay(GRAPE_JUICE_OVERLAY_RED);
+				GlStateManager.color(1, 1, 1, 1);
+			} else if (state.getBlock().equals(ModFluids.BLOCK_GRAPE_JUICE_GREEN)) {
+				event.setCanceled(true);
+				float brightness = player.getBrightnessForRender();
+				GlStateManager.color(brightness, brightness, brightness, 0.99F);
+				drawBlockOverlay(GRAPE_JUICE_OVERLAY_GREEN);
 				GlStateManager.color(1, 1, 1, 1);
 			} else if (state.getBlock().equals(ModFluids.BLOCK_APPLE_JUICE)) {
 				event.setCanceled(true);

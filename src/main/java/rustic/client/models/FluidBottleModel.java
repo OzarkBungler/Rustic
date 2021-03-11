@@ -140,10 +140,12 @@ public class FluidBottleModel implements IModel {
 
 		if (liquidLocation != null && fluidSprite != null) {
 			TextureAtlasSprite liquid = bakedTextureGetter.apply(liquidLocation);
-			builder.addAll(ItemTextureQuadConverter.convertTexture(format, transform, liquid, fluidSprite,
-					NORTH_Z_FLUID, EnumFacing.NORTH, fluid.getColor()));
-			builder.addAll(ItemTextureQuadConverter.convertTexture(format, transform, liquid, fluidSprite,
-					SOUTH_Z_FLUID, EnumFacing.SOUTH, fluid.getColor()));
+			//Move off of the "depreciated" call and force the conversion we want.
+			//I have no idea why this broke, other than Forge fixing itself into uselessness.
+			builder.addAll(ItemTextureQuadConverter.convertTextureVertical(format, transform, liquid, fluidSprite,
+					NORTH_Z_FLUID, EnumFacing.NORTH, fluid.getColor(), -1));
+			builder.addAll(ItemTextureQuadConverter.convertTextureVertical(format, transform, liquid, fluidSprite,
+					SOUTH_Z_FLUID, EnumFacing.SOUTH, fluid.getColor(), -1));
 		}
 
 		return new BakedFluidBottle(this, builder.build(), fluidSprite, format, Maps.immutableEnumMap(transformMap),

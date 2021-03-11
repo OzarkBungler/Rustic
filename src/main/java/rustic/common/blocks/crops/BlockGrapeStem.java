@@ -33,14 +33,16 @@ public class BlockGrapeStem extends BlockBase implements IGrowable, IPlantable {
 
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
 
+	private BlockGrapeLeaves grapeSpecies;
 	private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[] {
 			new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.25D, 0.625D),
 			new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.5D, 0.625D),
 			new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D),
 			new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D) };
 
-	public BlockGrapeStem() {
-		super(Material.PLANTS, "grape_stem");
+	public BlockGrapeStem(String name, BlockGrapeLeaves grapeSpecies) {
+		super(Material.PLANTS, name);
+		this.grapeSpecies = grapeSpecies;
 		setSoundType(SoundType.PLANT);
 		setHardness(0.5F);
 		setCreativeTab(Rustic.farmingTab);
@@ -101,7 +103,7 @@ public class BlockGrapeStem extends BlockBase implements IGrowable, IPlantable {
 
 					EnumFacing.Axis axis = worldIn.getBlockState(pos.up()).getValue(BlockRope.AXIS);
 					worldIn.setBlockState(pos.up(),
-							ModBlocks.GRAPE_LEAVES.getDefaultState().withProperty(BlockGrapeLeaves.AXIS, axis).withProperty(BlockGrapeLeaves.DIST, 0), 3);
+							this.grapeSpecies.getDefaultState().withProperty(BlockGrapeLeaves.AXIS, axis).withProperty(BlockGrapeLeaves.DIST, 0), 3);
 					net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state,
 							worldIn.getBlockState(pos));
 				}
@@ -144,7 +146,7 @@ public class BlockGrapeStem extends BlockBase implements IGrowable, IPlantable {
 		} else {
 			EnumFacing.Axis axis = worldIn.getBlockState(pos.up()).getValue(BlockRope.AXIS);
 			worldIn.setBlockState(pos.up(),
-					ModBlocks.GRAPE_LEAVES.getDefaultState().withProperty(BlockGrapeLeaves.AXIS, axis), 3);
+					this.grapeSpecies.getDefaultState().withProperty(BlockGrapeLeaves.AXIS, axis), 3);
 		}
 	}
 

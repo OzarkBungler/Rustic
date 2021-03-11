@@ -80,7 +80,16 @@ public class EventHandlerCommon {
 			}
 			if (tryDrop && rand.nextInt(10) == 0) {
 				try {
-					event.getDrops().add(new ItemStack(ModBlocks.GRAPE_STEM));
+					switch(rand.nextInt(3)) {
+					case 0 :
+						event.getDrops().add(new ItemStack(ModBlocks.GRAPE_STEM_GREEN));
+						break;
+					case 1 :
+						event.getDrops().add(new ItemStack(ModBlocks.GRAPE_STEM_RED));
+						break;
+					default :
+						event.getDrops().add(new ItemStack(ModBlocks.GRAPE_STEM));
+					}
 				} catch (UnsupportedOperationException e) {
 
 				}
@@ -137,7 +146,7 @@ public class EventHandlerCommon {
 						player.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
 						stack.shrink(1);
 						ItemStack bottlestack = new ItemStack(ModItems.FLUID_BOTTLE, 1);
-						NBTTagCompound fluidTag = new FluidStack(fluidblock.getFluid(), 1000)
+						NBTTagCompound fluidTag = new FluidStack(fluidblock.getFluid(), ItemFluidBottle.BOTTLE_SIZE)
 								.writeToNBT(new NBTTagCompound());
 						NBTTagCompound tag = new NBTTagCompound();
 						tag.setTag(ItemFluidBottle.FLUID_NBT_KEY, fluidTag);
@@ -156,10 +165,10 @@ public class EventHandlerCommon {
 					IFluidHandler tank = world.getTileEntity(pos)
 							.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, event.getFace());
 					
-					if (tank != null && tank.drain(1000, false) != null && tank.drain(1000, false).getFluid() != null) {
-						if (ItemFluidBottle.VALID_FLUIDS.contains(tank.drain(1000, false).getFluid())
-								&& tank.drain(1000, false).amount >= 1000) {
-							FluidStack fill = tank.drain(1000, true);
+					if (tank != null && tank.drain(ItemFluidBottle.BOTTLE_SIZE, false) != null && tank.drain(ItemFluidBottle.BOTTLE_SIZE, false).getFluid() != null) {
+						if (ItemFluidBottle.VALID_FLUIDS.contains(tank.drain(ItemFluidBottle.BOTTLE_SIZE, false).getFluid())
+								&& tank.drain(ItemFluidBottle.BOTTLE_SIZE, false).amount >= ItemFluidBottle.BOTTLE_SIZE) {
+							FluidStack fill = tank.drain(ItemFluidBottle.BOTTLE_SIZE, true);
 							player.addStat(StatList.getObjectUseStats(stack.getItem()));
 							player.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
 							stack.shrink(1);
@@ -172,9 +181,9 @@ public class EventHandlerCommon {
 								player.dropItem(bottlestack, false);
 							}
 							event.setCanceled(true);
-						} else if (tank.drain(1000, false).getFluid() == FluidRegistry.WATER) {
-							//FluidStack fill = tank.drain(1000, true);
-							tank.drain(1000, true);
+						} else if (tank.drain(ItemFluidBottle.BOTTLE_SIZE, false).getFluid() == FluidRegistry.WATER) {
+							//FluidStack fill = tank.drain(ItemFluidBottle.BOTTLE_SIZE, true);
+							tank.drain(ItemFluidBottle.BOTTLE_SIZE, true);
 							player.addStat(StatList.getObjectUseStats(stack.getItem()));
 							player.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
 							stack.shrink(1);
@@ -227,7 +236,9 @@ public class EventHandlerCommon {
 					ModItems.CHILI_PEPPER_SEEDS,
 					ModItems.TOMATO_SEEDS,
 					Item.getItemFromBlock(ModBlocks.APPLE_SEEDS),
-					Item.getItemFromBlock(ModBlocks.GRAPE_STEM)
+					Item.getItemFromBlock(ModBlocks.GRAPE_STEM),
+					Item.getItemFromBlock(ModBlocks.GRAPE_STEM_RED),
+					Item.getItemFromBlock(ModBlocks.GRAPE_STEM_GREEN)
 			), false));
 		}
 	}

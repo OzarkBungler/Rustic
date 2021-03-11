@@ -19,6 +19,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import rustic.common.blocks.fluids.FluidBooze;
+import rustic.common.blocks.crops.BlockHerbBase;
+import rustic.common.items.ItemHerbEdible;
 
 public class ContainerBrewingBarrel extends Container {
 	
@@ -70,7 +72,7 @@ public class ContainerBrewingBarrel extends Container {
 				return stack.getItem() == Items.GLASS_BOTTLE;
 			}
 		});
-		addSlotToContainer(new SlotItemHandler(itemHandler, 2, 26, 15) {
+		addSlotToContainer(new SlotItemHandler(itemHandler, 2, 42, 7) {
 			@Override
 			public boolean isItemValid(@Nonnull ItemStack stack) {
 				if (!super.isItemValid(stack)) {
@@ -85,7 +87,7 @@ public class ContainerBrewingBarrel extends Container {
 		});
 		addSlotToContainer(new OutputSlot(itemHandler, 3, 62, 63));
 		addSlotToContainer(new OutputSlot(itemHandler, 4, 116, 63));
-		addSlotToContainer(new OutputSlot(itemHandler, 5, 26, 55));
+		addSlotToContainer(new OutputSlot(itemHandler, 5, 42, 63));
 	}
 	
 	@Nullable
@@ -141,7 +143,7 @@ public class ContainerBrewingBarrel extends Container {
                     	if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
                     		return ItemStack.EMPTY;
                     	}
-                    }
+                    } // Add slots logic here
                 } else if (index > 5 && index < 33) {
                     if (!this.mergeItemStack(itemstack1, 33, 42, false)) {
                         return ItemStack.EMPTY;

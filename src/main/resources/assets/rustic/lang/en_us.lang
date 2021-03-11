@@ -133,6 +133,10 @@ tile.rustic.rope.name=Rope
 tile.rustic.stake_tied.name=Stake With Rope
 tile.rustic.grape_stem.name=Grape Seeds
 tile.rustic.grape_leaves.name=Grape Leaves
+tile.rustic.grape_stem_red.name=Red Grape Seeds
+tile.rustic.grape_leaves_red.name=Red Grape Leaves
+tile.rustic.grape_stem_green.name=Green Grape Seeds
+tile.rustic.grape_leaves_green.name=Green Grape Leaves
 tile.rustic.brewing_barrel.name=Brewing Barrel
 tile.rustic.apple_seeds.name=Apple Seeds
 tile.rustic.sapling_apple.name=Apple Sapling
@@ -162,6 +166,8 @@ item.rustic.chili_pepper.name=Chili Pepper
 item.rustic.chili_pepper_seeds.name=Chili Pepper Seeds
 item.rustic.wildberries.name=Wildberries
 item.rustic.grapes.name=Grapes
+item.rustic.grapes_red.name=Red Grapes
+item.rustic.grapes_green.name=Green Grapes
 item.tile.rustic.olive_door.name=Olive Door
 item.tile.rustic.ironwood_door.name=Ironwood Door
 item.rustic:oliveseed.name=Olive Pit
@@ -176,6 +182,10 @@ tile.rustic.wildberry_juice.name=Wildberry Juice
 fluid.wildberryjuice=Wildberry Juice
 tile.rustic.grape_juice.name=Grape Juice
 fluid.grapejuice=Grape Juice
+tile.rustic.grape_juice_red.name=Red Grape Juice
+fluid.grapejuicered=Red Grape Juice
+tile.rustic.grape_juice_green.name=Green Grape Juice
+fluid.grapejuicegreen=Green Grape Juice
 tile.rustic.apple_juice.name=Apple Juice
 fluid.applejuice=Apple Juice
 tile.rustic.ale_wort.name=Ale Wort
@@ -183,12 +193,16 @@ fluid.alewort=Ale Wort
 tile.rustic.honey.name=Honey
 fluid.honey=Honey
 
+fluid.milk=Milk
+
 fluid.ale=Ale
 fluid.cider=Cider
 fluid.ironwine=Iron Wine
 fluid.mead=Mead
 fluid.wildberrywine=Wildberry Wine
 fluid.wine=Wine
+fluid.winered=Red Wine
+fluid.winegreen=Green Wine
 
 #Potion Effects
 effect.ironskin=Iron Skin

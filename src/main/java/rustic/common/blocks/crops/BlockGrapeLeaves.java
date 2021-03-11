@@ -23,6 +23,7 @@ import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -45,10 +46,11 @@ import rustic.common.blocks.BlockRopeBase;
 import rustic.common.blocks.IColoredBlock;
 import rustic.common.blocks.ModBlocks;
 import rustic.common.items.ModItems;
+import rustic.common.items.ItemFoodBase;
 import rustic.core.ClientProxy;
 import rustic.core.Rustic;
 
-public class BlockGrapeLeaves extends BlockRopeBase implements IGrowable, IColoredBlock {
+public abstract class BlockGrapeLeaves extends BlockRopeBase implements IGrowable, IColoredBlock {
 
 	public static final PropertyBool GRAPES = PropertyBool.create("grapes");
 	public static final PropertyInteger DIST = PropertyInteger.create("distance", 0, 1);
@@ -63,8 +65,10 @@ public class BlockGrapeLeaves extends BlockRopeBase implements IGrowable, IColor
 	public static final AxisAlignedBB BRANCH_Z_AABB = new AxisAlignedBB(0.1875F, 0.1875F, 0.0F, 0.8125F, 0.8125F, 1.0F);
 	public static final AxisAlignedBB BRANCH_X_AABB = new AxisAlignedBB(0.0F, 0.1875F, 0.1875F, 1.0F, 0.8125F, 0.8125F);
 
-	public BlockGrapeLeaves() {
-		super(Material.LEAVES, "grape_leaves", false);
+	public abstract Item grapeSpecies();
+
+	public BlockGrapeLeaves(String name) {
+		super(Material.LEAVES, name, false);
 		GameRegistry.findRegistry(Block.class).register(this);
 		this.setTickRandomly(true);
 		setCreativeTab(Rustic.farmingTab);
@@ -78,7 +82,7 @@ public class BlockGrapeLeaves extends BlockRopeBase implements IGrowable, IColor
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		List<ItemStack> stacks = new ArrayList<ItemStack>();
 		if (state.getValue(GRAPES)) {
-			stacks.add(new ItemStack(ModItems.GRAPES));
+			stacks.add(new ItemStack(this.grapeSpecies()));
 		}
 		return stacks;
 	}
@@ -100,7 +104,7 @@ public class BlockGrapeLeaves extends BlockRopeBase implements IGrowable, IColor
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (state.getValue(GRAPES)) {
 			world.setBlockState(pos, state.withProperty(GRAPES, false), 3);
-			Block.spawnAsEntity(world, pos.offset(side), new ItemStack(ModItems.GRAPES, world.rand.nextInt(2) + 1));
+			Block.spawnAsEntity(world, pos.offset(side), new ItemStack(this.grapeSpecies(), world.rand.nextInt(2) + 1));
 			return true;
 		}
 		return false;
@@ -146,7 +150,7 @@ public class BlockGrapeLeaves extends BlockRopeBase implements IGrowable, IColor
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
 			EntityPlayer player) {
-		return new ItemStack(ModItems.GRAPES);
+		return new ItemStack(this.grapeSpecies());
 	}
 	
 	@Override

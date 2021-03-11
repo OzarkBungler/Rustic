@@ -44,7 +44,7 @@ public class Rustic {
 	public static final String MODID = "rustic";
 	public static final String NAME = "Rustic";
 	public static final String VERSION = "1.1.7";
-	public static final String DEPENDENCIES = "after:dynamictrees@[1.12.2-0.9.1e,);after:dynamictreesbop;before:dynamictreestc";
+	public static final String DEPENDENCIES = "after:dynamictrees@[1.12.2-0.9.1e,);after:dynamictreesbop;before:dynamictreestc;after:thaumcraft";
 
 	@SidedProxy(clientSide = "rustic.core.ClientProxy", serverSide = "rustic.core.CommonProxy")
 	public static CommonProxy proxy;
@@ -165,8 +165,5 @@ public class Rustic {
 		if (Loader.isModLoaded("forestry") && Config.ENABLE_FORESTRY_COMPAT) {
 			Compat.doForestryCompat();
 		}
-		
-		// Fix for Rustic Thaumaturgy adding recipes directly in the data structure
-		Recipes.injectEvaporatingRecipes();
 	}
 }

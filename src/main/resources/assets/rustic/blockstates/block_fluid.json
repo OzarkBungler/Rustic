@@ -17,6 +17,12 @@
 		"grapejuice": [{
 			"custom": { "fluid": "grapejuice" }
 		}],
+		"grapejuicered": [{
+			"custom": { "fluid": "grapejuicered" }
+		}],
+		"grapejuicegreen": [{
+			"custom": { "fluid": "grapejuicegreen" }
+		}],
 		"applejuice": [{
 			"custom": { "fluid": "applejuice" }
 		}],

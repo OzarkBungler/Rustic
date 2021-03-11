@@ -70,16 +70,16 @@ public class BrewingRecipeCategory extends BlankRecipeCategory {
 	public void setRecipe(IRecipeLayout layout, IRecipeWrapper wrapper, IIngredients ingredients) {
 		IGuiFluidStackGroup fluid = layout.getFluidStacks();
 		
-		fluid.init(0, true, 40, 24, 16, 32, 8000, true, null);
+		fluid.init(0, true, 40, 24, 16, 32, 2000, true, null);
 		fluid.set(0, ingredients.getInputs(FluidStack.class).get(0));
 		
-		fluid.init(1, false, 94, 24, 16, 32, 8000, true, null);
+		fluid.init(1, false, 94, 24, 16, 32, 2000, true, null);
 		fluid.set(1, ingredients.getOutputs(FluidStack.class).get(0));
 		
-		fluid.init(2, true, 4, 32, 16, 16, 1000, true, null);
+		fluid.init(2, true, 4, 32, 16, 16, 250, true, null);
 		FluidStack aux = ingredients.getOutputs(FluidStack.class).get(0).get(0).copy();
 		FluidStack auxDummy = ingredients.getOutputs(FluidStack.class).get(0).get(0).copy();
-		aux.amount = 1000;
+		aux.amount = 250;
 		auxDummy.amount = 0;
 		List<FluidStack> auxList = new ArrayList<FluidStack>();
 		auxList.add(auxDummy);

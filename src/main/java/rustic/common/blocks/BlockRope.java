@@ -37,7 +37,7 @@ public class BlockRope extends BlockRopeBase {
 				|| (state.getValue(AXIS) == EnumFacing.Axis.Y && facing.getAxis() == EnumFacing.Axis.Y));
 		boolean isSideSolid = world.isSideSolid(pos.offset(facing), facing.getOpposite(), false);
 		boolean isTiedStake = testState.getBlock() == ModBlocks.STAKE_TIED;
-		boolean isGrapeLeaves = testState.getBlock() == ModBlocks.GRAPE_LEAVES
+		boolean isGrapeLeaves = testState.getBlock() instanceof BlockGrapeLeaves
 				&& testState.getValue(BlockGrapeLeaves.AXIS) == state.getValue(AXIS);
 		boolean isLattice = testState.getBlock() instanceof BlockLattice;
 
@@ -55,7 +55,7 @@ public class BlockRope extends BlockRopeBase {
 		boolean isThis = testState.getBlock() == this && testState.getValue(AXIS) == side.getAxis();
 		boolean isSideSolid = world.isSideSolid(pos.offset(side.getOpposite()), side, false);
 		boolean isTiedStake = testState.getBlock() == ModBlocks.STAKE_TIED;
-		boolean isGrapeLeaves = testState.getBlock() == ModBlocks.GRAPE_LEAVES
+		boolean isGrapeLeaves = testState.getBlock() instanceof BlockGrapeLeaves
 				&& testState.getValue(BlockGrapeLeaves.AXIS) == side.getAxis();
 		boolean isLattice = testState.getBlock() instanceof BlockLattice;
 

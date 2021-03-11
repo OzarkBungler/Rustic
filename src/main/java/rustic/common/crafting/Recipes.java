@@ -46,8 +46,7 @@ public class Recipes {
 	// Do not read directly those data structures, use the public methods below
 	// Those are not made private to prevent breaking changes
 	public static List<ICrushingTubRecipe> crushingTubRecipes = new ArrayList<ICrushingTubRecipe>();
-	public static List<IEvaporatingBasinRecipe> evaporatingRecipes = new ArrayList<IEvaporatingBasinRecipe>();
-	public static HashMap<Fluid, IEvaporatingBasinRecipe> evaporatingRecipesMap = new HashMap<Fluid, IEvaporatingBasinRecipe>();
+	public static HashMap<Fluid, IEvaporatingBasinRecipe> evaporatingRecipes = new HashMap<Fluid, IEvaporatingBasinRecipe>();
 	public static List<ICondenserRecipe> condenserRecipes = new ArrayList<ICondenserRecipe>();
 	public static List<IBrewingBarrelRecipe> brewingRecipes = new ArrayList<IBrewingBarrelRecipe>();
 
@@ -61,15 +60,10 @@ public class Recipes {
 		addFuels();
 		addCrushingTubRecipes();
 		addEvaporatingRecipes();
-		addCondenserRecipes();
-		addBrewingRecipes();
-	}
-	
-	// Fix for Rustic Thaumaturgy adding recipes directly in the data structure
-	public static void injectEvaporatingRecipes() {
-		for (IEvaporatingBasinRecipe recipe : evaporatingRecipes) {
-			evaporatingRecipesMap.putIfAbsent(recipe.getFluid(), recipe);
+		if (!Config.CONDENSER_OVERRIDE) {
+			addCondenserRecipes();
 		}
+		addBrewingRecipes();
 	}
 	
 	public static void add(ICrushingTubRecipe recipe) {
@@ -77,7 +71,7 @@ public class Recipes {
 	}
 	
 	public static void add(IEvaporatingBasinRecipe recipe) {
-		evaporatingRecipesMap.put(recipe.getFluid(), recipe);
+		evaporatingRecipes.put(recipe.getFluid(), recipe);
 	}
 	
 	public static void add(ICondenserRecipe recipe) {
@@ -93,7 +87,7 @@ public class Recipes {
 	}
 	
 	public static Collection<IEvaporatingBasinRecipe> getEvaporatingRecipes() {
-		return Collections.unmodifiableCollection(evaporatingRecipesMap.values());
+		return Collections.unmodifiableCollection(evaporatingRecipes.values());
 	}
 	
 	public static Collection<ICondenserRecipe> getCondenserRecipe() {
@@ -136,7 +130,7 @@ public class Recipes {
 	
 	public static int removeEvaporatingRecipe(ItemStack output) {
 		int removed = 0;
-		Iterator<Map.Entry<Fluid, IEvaporatingBasinRecipe>> it = evaporatingRecipesMap.entrySet().iterator();
+		Iterator<Map.Entry<Fluid, IEvaporatingBasinRecipe>> it = evaporatingRecipes.entrySet().iterator();
 		IEvaporatingBasinRecipe r;
 		while (it.hasNext()) {
 			r = it.next().getValue();
@@ -149,7 +143,7 @@ public class Recipes {
 	}
 	
 	public static boolean removeEvaporatingRecipe(FluidStack input) {
-		return (evaporatingRecipesMap.remove(input.getFluid()) !=  null);
+		return (evaporatingRecipes.remove(input.getFluid()) !=  null);
 	}
 	
 	public static int removeCondenserRecipe(ItemStack output) {
@@ -207,12 +201,16 @@ public class Recipes {
 		OreDictionary.registerOre("listAllfruit", new ItemStack(ModItems.OLIVES));
 		OreDictionary.registerOre("listAllfruit", new ItemStack(ModItems.IRONBERRIES));
 		OreDictionary.registerOre("listAllfruit", new ItemStack(ModItems.GRAPES));
-		OreDictionary.registerOre("listAllberry", new ItemStack(ModItems.GRAPES));
+		OreDictionary.registerOre("listAllfruit", new ItemStack(ModItems.GRAPES_RED));
+		OreDictionary.registerOre("listAllfruit", new ItemStack(ModItems.GRAPES_GREEN));
 		OreDictionary.registerOre("listAllberry", new ItemStack(ModItems.IRONBERRIES));
 		OreDictionary.registerOre("listAllberry", new ItemStack(ModItems.WILDBERRIES));
 		OreDictionary.registerOre("listAllfruit", new ItemStack(ModItems.WILDBERRIES));
 		OreDictionary.registerOre("cropWildberry", new ItemStack(ModItems.WILDBERRIES));
 		OreDictionary.registerOre("cropGrape", new ItemStack(ModItems.GRAPES));
+		OreDictionary.registerOre("cropGrape", new ItemStack(ModItems.GRAPES_RED));
+		OreDictionary.registerOre("cropGrape", new ItemStack(ModItems.GRAPES_GREEN));
+		OreDictionary.registerOre("cropGreengrape", new ItemStack(ModItems.GRAPES_GREEN));
 		OreDictionary.registerOre("cropChilipepper", new ItemStack(ModItems.CHILI_PEPPER));
 		OreDictionary.registerOre("listAllpepper", new ItemStack(ModItems.CHILI_PEPPER));
 		OreDictionary.registerOre("cropTomato", new ItemStack(ModItems.TOMATO));
@@ -285,6 +283,8 @@ public class Recipes {
 		
 		OreDictionary.registerOre("dyeRed", new ItemStack(ModItems.WILDBERRIES));
 		OreDictionary.registerOre("dyePurple", new ItemStack(ModItems.GRAPES));
+		OreDictionary.registerOre("dyeRed", new ItemStack(ModItems.GRAPES_RED));
+		OreDictionary.registerOre("dyeLime", new ItemStack(ModItems.GRAPES_GREEN));
 		OreDictionary.registerOre("dyeLightGray", new ItemStack(ModItems.IRONBERRIES));
 	}
 	
@@ -487,32 +487,36 @@ public class Recipes {
 
 	private static void addCrushingTubRecipes() {
 		crushingTubRecipes
-				.add(new CrushingTubRecipe(new FluidStack(ModFluids.OLIVE_OIL, 250), new ItemStack(ModItems.OLIVES)));
-		crushingTubRecipes.add(new CrushingTubRecipe(new FluidStack(ModFluids.IRONBERRY_JUICE, 250),
+				.add(new CrushingTubRecipe(new FluidStack(ModFluids.OLIVE_OIL, 50), new ItemStack(ModItems.OLIVES)));
+		crushingTubRecipes.add(new CrushingTubRecipe(new FluidStack(ModFluids.IRONBERRY_JUICE, 50),
 				new ItemStack(ModItems.IRONBERRIES)));
-		crushingTubRecipes.add(new CrushingTubRecipe(new FluidStack(FluidRegistry.WATER, 250),
+		crushingTubRecipes.add(new CrushingTubRecipe(new FluidStack(FluidRegistry.WATER, 50),
 				new ItemStack(Items.REEDS), new ItemStack(Items.SUGAR, 2)));
-		crushingTubRecipes.add(new CrushingTubRecipe(new FluidStack(ModFluids.WILDBERRY_JUICE, 250),
+		crushingTubRecipes.add(new CrushingTubRecipe(new FluidStack(ModFluids.WILDBERRY_JUICE, 50),
 				new ItemStack(ModItems.WILDBERRIES)));
-		crushingTubRecipes
-				.add(new CrushingTubRecipe(new FluidStack(ModFluids.GRAPE_JUICE, 250), new ItemStack(ModItems.GRAPES)));
+		crushingTubRecipes.add(new CrushingTubRecipe(new FluidStack(ModFluids.GRAPE_JUICE, 50),
+				new ItemStack(ModItems.GRAPES)));
+		crushingTubRecipes.add(new CrushingTubRecipe(new FluidStack(ModFluids.GRAPE_JUICE_RED, 50),
+				new ItemStack(ModItems.GRAPES_RED)));
+		crushingTubRecipes.add(new CrushingTubRecipe(new FluidStack(ModFluids.GRAPE_JUICE_GREEN, 50),
+				new ItemStack(ModItems.GRAPES_GREEN)));
 		if (!Loader.isModLoaded("dynamictrees")) {
-			crushingTubRecipes.add(new CrushingTubRecipe(new FluidStack(ModFluids.APPLE_JUICE, 250),
+			crushingTubRecipes.add(new CrushingTubRecipe(new FluidStack(ModFluids.APPLE_JUICE, 50),
 				new ItemStack(Items.APPLE), new ItemStack(ModBlocks.APPLE_SEEDS)));
 		} else {
-			crushingTubRecipes.add(new CrushingTubRecipe(new FluidStack(ModFluids.APPLE_JUICE, 250),
+			crushingTubRecipes.add(new CrushingTubRecipe(new FluidStack(ModFluids.APPLE_JUICE, 50),
 					new ItemStack(Items.APPLE), new ItemStack(DynamicTreesCompat.getAppleSeed())));
 		}
 		crushingTubRecipes
-				.add(new CrushingTubRecipe(new FluidStack(ModFluids.HONEY, 250), new ItemStack(ModItems.HONEYCOMB)));
+				.add(new CrushingTubRecipe(new FluidStack(ModFluids.HONEY, 50), new ItemStack(ModItems.HONEYCOMB)));
 	}
 
 	private static void addEvaporatingRecipes() {
-		evaporatingRecipesMap.put(
+		evaporatingRecipes.put(
 				ModFluids.IRONBERRY_JUICE,
 				new EvaporatingBasinRecipe(
 						new ItemStack(ModItems.IRON_DUST_TINY, 1),
-						new FluidStack(ModFluids.IRONBERRY_JUICE, 500)
+						new FluidStack(ModFluids.IRONBERRY_JUICE, 100)
 				)
 		);
 	}
@@ -614,6 +618,10 @@ public class Recipes {
 				new FluidStack(ModFluids.WILDBERRY_JUICE, 1)));
 		brewingRecipes.add(
 				new BrewingBarrelRecipe(new FluidStack(ModFluids.WINE, 1), new FluidStack(ModFluids.GRAPE_JUICE, 1)));
+		brewingRecipes.add(
+				new BrewingBarrelRecipe(new FluidStack(ModFluids.WINE_RED, 1), new FluidStack(ModFluids.GRAPE_JUICE_RED, 1)));
+		brewingRecipes.add(
+				new BrewingBarrelRecipe(new FluidStack(ModFluids.WINE_GREEN, 1), new FluidStack(ModFluids.GRAPE_JUICE_GREEN, 1)));
 	}
 
 }

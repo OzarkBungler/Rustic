@@ -30,13 +30,18 @@ import net.minecraftforge.fluids.capability.ItemFluidContainer;
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+//import net.minecraftforge.oredict.OreDictionary;
 import rustic.common.Config;
 import rustic.common.blocks.fluids.FluidBooze;
+import rustic.common.blocks.crops.BlockHerbBase;
 import rustic.common.crafting.BrewingBarrelRecipe;
 import rustic.common.crafting.IBrewingBarrelRecipe;
 import rustic.common.crafting.Recipes;
 import rustic.common.inventory.ExternalItemHandler;
 import rustic.common.items.ModItems;
+import rustic.common.items.ItemHerbEdible;
+
+//ArrayList<Item> Ordictionary.getOres(String, false);
 
 public class TileEntityBrewingBarrel extends TileEntity implements ITickable {
 
@@ -79,9 +84,9 @@ public class TileEntityBrewingBarrel extends TileEntity implements ITickable {
 		}
 	};
 
-	protected FluidTank input = new FluidTank(8000);
-	protected FluidTank output = new FluidTank(8000);
-	protected FluidTank auxiliary = new FluidTank(1000);
+	protected FluidTank input = new FluidTank(2000);
+	protected FluidTank output = new FluidTank(2000);
+	protected FluidTank auxiliary = new FluidTank(250);
 
 	protected int brewTime;
 
@@ -419,12 +424,17 @@ public class TileEntityBrewingBarrel extends TileEntity implements ITickable {
 		if (amount > 0 && recipe.matches(input.getFluid(), auxiliary.getFluid()) && !world.isRemote) {
 			FluidStack out = recipe.getResult(input.getFluid(), auxiliary.getFluid());
 			if (output.getFluidAmount() > 0 && output.getFluid().getFluid() == out.getFluid()) {
-				out = output.getFluid().copy();
+				int flow = output.getFluid().amount;
+				out.amount = flow;
+				output.drain(flow, true);
+				output.fill(out, true);
+				//output.setFluid(out);
 			}
 			out.amount = amount;
 			if (output.fill(out, false) == amount && input.drain(amount, false).amount == amount) {
 				output.fill(out, true);
 				input.drain(amount, true);
+				auxiliary.drain(250, true);
 				recipe = null;
 			}
 		}

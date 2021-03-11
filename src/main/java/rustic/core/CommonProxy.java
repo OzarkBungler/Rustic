@@ -54,7 +54,6 @@ public class CommonProxy {
         if (Loader.isModLoaded("dynamictrees")) {
 			Compat.preInitDynamicTreesCompat();
 		}
-        
     }
 
     public void init(FMLInitializationEvent event) {
@@ -81,19 +80,23 @@ public class CommonProxy {
     	ItemFluidBottle.addFluid(ModFluids.IRONBERRY_JUICE);
     	ItemFluidBottle.addFluid(ModFluids.WILDBERRY_JUICE);
     	ItemFluidBottle.addFluid(ModFluids.GRAPE_JUICE);
+    	ItemFluidBottle.addFluid(ModFluids.GRAPE_JUICE_RED);
+    	ItemFluidBottle.addFluid(ModFluids.GRAPE_JUICE_GREEN);
     	ItemFluidBottle.addFluid(ModFluids.APPLE_JUICE);
     	ItemFluidBottle.addFluid(ModFluids.ALE_WORT);
     	ItemFluidBottle.addFluid(FluidRegistry.getFluid(ModFluids.HONEY.getName()));
     	if (FluidRegistry.isFluidRegistered("for.honey")) {
     		ItemFluidBottle.addFluid(FluidRegistry.getFluid("for.honey"));
     	}
-    	
+
     	ItemFluidBottle.addFluid(ModFluids.ALE);
     	ItemFluidBottle.addFluid(ModFluids.CIDER);
     	ItemFluidBottle.addFluid(ModFluids.IRON_WINE);
     	ItemFluidBottle.addFluid(ModFluids.MEAD);
     	ItemFluidBottle.addFluid(ModFluids.WILDBERRY_WINE);
     	ItemFluidBottle.addFluid(ModFluids.WINE);
+    	ItemFluidBottle.addFluid(ModFluids.WINE_RED);
+    	ItemFluidBottle.addFluid(ModFluids.WINE_GREEN);
     }
     
     public void spawnAlchemySmokeFX(World world, int brewTime, double x, double y, double z, double xVel, double yVel, double zVel) {

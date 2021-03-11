@@ -50,7 +50,7 @@ public class GuiBrewingBarrel extends GuiContainer {
 		if (isPointInRegion(116, 27, 16, 32, mouseX, mouseY)) {
 			drawFluidTooltip(te.getOutputFluid(), te.getOutputCapacity(), mouseX, mouseY);
 		}
-		if (isPointInRegion(26, 35, 16, 16, mouseX, mouseY)) {
+		if (isPointInRegion(42, 27, 16, 16, mouseX, mouseY)) {
 			drawFluidTooltip(te.getAuxiliaryFluid(), te.getAuxiliaryCapacity(), mouseX, mouseY);
 		}
 	}
@@ -69,7 +69,7 @@ public class GuiBrewingBarrel extends GuiContainer {
 			FluidClientUtil.drawGuiLiquid(new FluidStack(te.getOutputFluid(), te.getOutputAmount()), te.getOutputCapacity(), guiLeft + 116, guiTop + 27, 16, 32, background);
 		}
 		if (te.getAuxiliaryAmount() > 0) {
-			FluidClientUtil.drawGuiLiquid(new FluidStack(te.getAuxiliaryFluid(), te.getAuxiliaryAmount()), te.getAuxiliaryCapacity(), guiLeft + 26, guiTop + 35, 16, 16, background);
+			FluidClientUtil.drawGuiLiquid(new FluidStack(te.getAuxiliaryFluid(), te.getAuxiliaryAmount()), te.getAuxiliaryCapacity(), guiLeft + 42, guiTop + 27, 16, 16, background);
 		}
 		
 		if (te.slot0Empty()) {
@@ -79,7 +79,7 @@ public class GuiBrewingBarrel extends GuiContainer {
 			this.drawTexturedModalRect(guiLeft + 116, guiTop + 7, 176, 70, 16, 16);
 		}
 		if (te.slot2Empty()) {
-			this.drawTexturedModalRect(guiLeft + 26, guiTop + 15, 176, 70, 16, 16);
+			this.drawTexturedModalRect(guiLeft + 42, guiTop + 7, 176, 70, 16, 16);
 		}
 		
 		if (te.isBrewing()) {
@@ -90,7 +90,7 @@ public class GuiBrewingBarrel extends GuiContainer {
 		int l = this.getBrewProgressScaled(24);
 		this.drawTexturedModalRect(guiLeft + 85, guiTop + 35, 176, 28, l, 16);
 		int m = this.getBrewProgressScaled(10);
-		this.drawTexturedModalRect(guiLeft + 45, guiTop + 38, 176, 44, m, 10);
+		this.drawTexturedModalRect(guiLeft + 51, guiTop + 44, 176, 44, m, 10);
 	}
 	
 	private int getBrewProgressScaled(int pixels) {

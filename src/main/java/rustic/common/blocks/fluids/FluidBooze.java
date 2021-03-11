@@ -7,11 +7,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import rustic.common.potions.PotionsRustic;
+import rustic.common.Config;
 
 public class FluidBooze extends FluidDrinkable {
 	
 	public static final String QUALITY_NBT_KEY = "Quality";
-	
+
 	private float inebriationChance = 0.5F;
 
 	public FluidBooze(String fluidName, ResourceLocation still, ResourceLocation flowing) {
@@ -32,10 +33,20 @@ public class FluidBooze extends FluidDrinkable {
 		float quality = getQuality(fluid);
 		
 		inebriate(world, player, quality);
-		affectPlayer(world, player, quality);
+		//affectPlayer(world, player, quality);
+		
+		if ((world.rand.nextFloat() * Config.BOOZE_EFFECT_WIDTH) + ((1.0F - Config.BOOZE_EFFECT_WIDTH) * 0.5F) < quality) {
+		affectBuff(world, player, quality);
+		} else {
+		affectDebuff(world, player, quality);
+		}
 	}
-	
-	protected void affectPlayer(World world, EntityPlayer player, float quality) {
+
+	protected void affectBuff(World world, EntityPlayer player, float quality) {
+		
+	}
+
+	protected void affectDebuff(World world, EntityPlayer player, float quality) {
 		
 	}
 	

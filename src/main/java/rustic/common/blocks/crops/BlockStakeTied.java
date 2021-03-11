@@ -112,7 +112,7 @@ public class BlockStakeTied extends BlockBase {
 		if (state1.getBlock() instanceof BlockRope && state1.getValue(BlockRope.AXIS) == EnumFacing.Axis.Z) {
 			n = true;
 		}
-		if (state1.getBlock() == ModBlocks.GRAPE_LEAVES && state1.getValue(BlockGrapeLeaves.AXIS) == EnumFacing.Axis.Z) {
+		if (state1.getBlock() instanceof BlockGrapeLeaves && state1.getValue(BlockGrapeLeaves.AXIS) == EnumFacing.Axis.Z) {
 			n = true;
 		}
 		if (state1.getBlock() == this) {
@@ -122,7 +122,7 @@ public class BlockStakeTied extends BlockBase {
 		if (state1.getBlock() instanceof BlockRope && state1.getValue(BlockRope.AXIS) == EnumFacing.Axis.X) {
 			w = true;
 		}
-		if (state1.getBlock() == ModBlocks.GRAPE_LEAVES && state1.getValue(BlockGrapeLeaves.AXIS) == EnumFacing.Axis.X) {
+		if (state1.getBlock() instanceof BlockGrapeLeaves && state1.getValue(BlockGrapeLeaves.AXIS) == EnumFacing.Axis.X) {
 			w = true;
 		}
 		if (state1.getBlock() == this) {
@@ -132,7 +132,7 @@ public class BlockStakeTied extends BlockBase {
 		if (state1.getBlock() instanceof BlockRope && state1.getValue(BlockRope.AXIS) == EnumFacing.Axis.Z) {
 			s = true;
 		}
-		if (state1.getBlock() == ModBlocks.GRAPE_LEAVES && state1.getValue(BlockGrapeLeaves.AXIS) == EnumFacing.Axis.Z) {
+		if (state1.getBlock() instanceof BlockGrapeLeaves && state1.getValue(BlockGrapeLeaves.AXIS) == EnumFacing.Axis.Z) {
 			s = true;
 		}
 		if (state1.getBlock() == this) {
@@ -142,7 +142,7 @@ public class BlockStakeTied extends BlockBase {
 		if (state1.getBlock() instanceof BlockRope && state1.getValue(BlockRope.AXIS) == EnumFacing.Axis.X) {
 			e = true;
 		}
-		if (state1.getBlock() == ModBlocks.GRAPE_LEAVES && state1.getValue(BlockGrapeLeaves.AXIS) == EnumFacing.Axis.X) {
+		if (state1.getBlock() instanceof BlockGrapeLeaves && state1.getValue(BlockGrapeLeaves.AXIS) == EnumFacing.Axis.X) {
 			e = true;
 		}
 		if (state1.getBlock() == this) {

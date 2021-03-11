@@ -46,6 +46,7 @@ public class ItemFluidBottle extends ItemFluidContainer {
 
 	public static List<Fluid> VALID_FLUIDS = new ArrayList<Fluid>();
 	public static final String FLUID_NBT_KEY = "Fluid";
+	public static final int BOTTLE_SIZE = 250;
 
 	public static void addFluid(Fluid fluid) {
 		VALID_FLUIDS.add(fluid);
@@ -54,10 +55,11 @@ public class ItemFluidBottle extends ItemFluidContainer {
 	private final ItemStack empty;
 
 	public ItemFluidBottle() {
-		super(1000);
+		super(BOTTLE_SIZE);
 		setRegistryName("fluid_bottle");
 		setUnlocalizedName(Rustic.MODID + "." + "fluid_bottle");
 		setCreativeTab(Rustic.farmingTab);
+		setMaxStackSize(16);
 		GameRegistry.findRegistry(Item.class).register(this);
 		empty = new ItemStack(Items.GLASS_BOTTLE);
 	}
@@ -76,7 +78,7 @@ public class ItemFluidBottle extends ItemFluidContainer {
 
 	@SideOnly(Side.CLIENT)
 	public ItemStack getDefaultInstance() {
-		NBTTagCompound nbt = new FluidStack(ModFluids.OLIVE_OIL, 1000).writeToNBT(new NBTTagCompound());
+		NBTTagCompound nbt = new FluidStack(ModFluids.OLIVE_OIL, BOTTLE_SIZE).writeToNBT(new NBTTagCompound());
 		ItemStack stack = super.getDefaultInstance();
 		NBTTagCompound tag = new NBTTagCompound();
 		tag.setTag(FLUID_NBT_KEY, nbt);
@@ -218,14 +220,14 @@ public class ItemFluidBottle extends ItemFluidContainer {
 
 			@Override
 			public int fill(FluidStack resource, boolean doFill) {
-				if (resource == null || resource.amount < Fluid.BUCKET_VOLUME || getFluid() != null
+				if (resource == null || resource.amount < BOTTLE_SIZE || getFluid() != null
 						|| !canFillFluidType(resource)) {
 					return 0;
 				}
 				if (doFill) {
 					setFluid(resource.copy());
 				}
-				return Fluid.BUCKET_VOLUME;
+				return BOTTLE_SIZE;
 			}
 
 			protected void setFluid(@Nullable FluidStack fluid) {
@@ -234,7 +236,7 @@ public class ItemFluidBottle extends ItemFluidContainer {
 				} else {
 					container = new ItemStack(ModItems.FLUID_BOTTLE);
 					FluidStack fs = fluid.copy();
-					fs.amount = 1000;
+					fs.amount = BOTTLE_SIZE;
 					NBTTagCompound fluidTag = fs.writeToNBT(new NBTTagCompound());
 					NBTTagCompound tag = new NBTTagCompound();
 					tag.setTag(FLUID_NBT_KEY, fluidTag);
@@ -244,7 +246,7 @@ public class ItemFluidBottle extends ItemFluidContainer {
 
 			@Override
 			public FluidStack drain(FluidStack resource, boolean doDrain) {
-				if (resource == null || resource.amount < Fluid.BUCKET_VOLUME) {
+				if (resource == null || resource.amount < BOTTLE_SIZE) {
 					return null;
 				}
 				return super.drain(resource, doDrain);
@@ -252,7 +254,7 @@ public class ItemFluidBottle extends ItemFluidContainer {
 
 			@Override
 			public FluidStack drain(int maxDrain, boolean doDrain) {
-				if (maxDrain < Fluid.BUCKET_VOLUME) {
+				if (maxDrain < BOTTLE_SIZE) {
 					return null;
 				}
 				return super.drain(maxDrain, doDrain);

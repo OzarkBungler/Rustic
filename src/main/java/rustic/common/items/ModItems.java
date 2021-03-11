@@ -37,6 +37,8 @@ public class ModItems {
 	public static ItemStakeCropSeed CHILI_PEPPER_SEEDS;
 	public static ItemFoodBase WILDBERRIES;
 	public static ItemFoodBase GRAPES;
+	public static ItemFoodBase GRAPES_RED;
+	public static ItemFoodBase GRAPES_GREEN;
 
 	public static void init() {
 		BOOK = new ItemBook();
@@ -72,12 +74,12 @@ public class ModItems {
 			@Override
 			protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
 				if (!worldIn.isRemote) {
-					player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 200, 15, false, false));
-					player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 200, 15, false, false));
-					player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 15, false, false));
-					player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 15, false, false));
-					player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 200, 15, false, false));
-					player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 200, 250, false, false));
+					player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 200, 1, false, false));
+					player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 200, 1, false, false));
+					player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 1, false, false));
+					player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 1, false, false));
+					player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 200, 1, false, false));
+					//player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 200, 250, false, false));
 				}
 			}
 		};
@@ -135,6 +137,18 @@ public class ModItems {
 				return 16;
 			}
 		};
+		GRAPES_RED = new ItemFoodBase("grapes_red", 3, 0.3F, false) {
+			@Override
+			public int getMaxItemUseDuration(ItemStack stack) {
+				return 16;
+			}
+		};
+		GRAPES_GREEN = new ItemFoodBase("grapes_green", 3, 0.3F, false) {
+			@Override
+			public int getMaxItemUseDuration(ItemStack stack) {
+				return 16;
+			}
+		};
 	}
 
 	public static void initModels() {
@@ -155,5 +169,7 @@ public class ModItems {
 		CHILI_PEPPER_SEEDS.initModel();
 		WILDBERRIES.initModel();
 		GRAPES.initModel();
+		GRAPES_RED.initModel();
+		GRAPES_GREEN.initModel();
 	};
 }

@@ -61,6 +61,8 @@ public class Config {
 	public static int MAX_BREW_QUALITY_CHANGE;
 	public static int MAX_BREW_TIME;
 	public static boolean ENABLE_BOTTLE_EMPTYING;
+	public static boolean CONDENSER_OVERRIDE;
+	public static float BOOZE_EFFECT_WIDTH;
 	public static List<Integer> OVERWORLD_GENERATION_WHITELIST = new ArrayList<Integer>();
 	public static List<Integer> NETHER_GENERATION_WHITELIST = new ArrayList<Integer>();
 	public static boolean ENABLE_CANDLE_INFUSION;
@@ -123,6 +125,8 @@ public class Config {
 		MIN_BREW_QUALITY_CHANGE = cfg.getInt("Minimum Increase To Brew Quality", CATEGORY_GENERAL, -1, -50, 50, "the minimum amount of increase that booze culture will provide to the new brew, in percent");
 		MAX_BREW_QUALITY_CHANGE = cfg.getInt("Maximum Increase To Brew Quality", CATEGORY_GENERAL, 4, -50, 50, "the maximum amount of increase that booze culture will provide to the new brew, in percent");
 		MAX_BREW_TIME = cfg.getInt("Maximum Brew Time", CATEGORY_GENERAL, 12000, 1200, 120000, "how long it should take for a brewing barrel to finish a brew, in ticks");
+		CONDENSER_OVERRIDE = cfg.getBoolean("Override Condenser Recipe Registration", CATEGORY_GENERAL, false, "disables rustic's own condenser recipes, mostly a packmaker convenience");
+		BOOZE_EFFECT_WIDTH = cfg.getFloat("Booze Random Roll Width", CATEGORY_GENERAL, 0.6F, 0.01F, 1F, "Width of the band in which alcohol positive/negative effects are randomly rolled, centered on 0.5.\nThe default means that qualities from 0.2 to 0.8 will produce random but increasingly positive effects");
 		ENABLE_BOTTLE_EMPTYING = cfg.getBoolean("Enable Bottle Emptying", CATEGORY_GENERAL, true, "set this to false if you experience any issues with Rustic's glass bottle emptying recipe");
 		ENABLE_SILVER_DECOR = cfg.getBoolean("Enable Silver Decoration Blocks", CATEGORY_COMPAT, true, "set this to false to disable silver chain, chandelier, candle, and lantern blocks");
 		ENABLE_CANDLE_INFUSION = cfg.getBoolean("Enable Thaumcraft Candle Infusion Stabilization", CATEGORY_COMPAT, true, "set this to false to remove rustic candles from thaumcraft paraphernalia.");
@@ -145,6 +149,8 @@ public class Config {
 		PROPERTY_ORDER_GENERAL.add("Minimum Increase To Brew Quality");
 		PROPERTY_ORDER_GENERAL.add("Maximum Increase To Brew Quality");
 		PROPERTY_ORDER_GENERAL.add("Maximum Brew Time");
+		PROPERTY_ORDER_GENERAL.add("Booze Random Roll Width");
+		PROPERTY_ORDER_GENERAL.add("Override Condenser Recipe Registration");
 		PROPERTY_ORDER_GENERAL.add("Enable Slate");
 		PROPERTY_ORDER_GENERAL.add("Enable Stone Pillars");
 		PROPERTY_ORDER_GENERAL.add("Enable Clay Walls");

@@ -259,7 +259,7 @@ public abstract class BlockBerryBush extends BlockBase implements IColoredBlock,
 
 	@Override
 	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-		return true;
+		return !state.getValue(BERRIES);
 	}
 
 	@Override

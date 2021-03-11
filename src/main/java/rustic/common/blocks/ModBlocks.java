@@ -145,6 +145,10 @@ public class ModBlocks {
 	public static BlockStakeTied STAKE_TIED;
 	public static BlockGrapeStem GRAPE_STEM;
 	public static BlockGrapeLeaves GRAPE_LEAVES;
+	public static BlockGrapeStem GRAPE_STEM_RED;
+	public static BlockGrapeLeaves GRAPE_LEAVES_RED;
+	public static BlockGrapeStem GRAPE_STEM_GREEN;
+	public static BlockGrapeLeaves GRAPE_LEAVES_GREEN;
 	public static BlockBrewingBarrel BREWING_BARREL;
 	public static BlockAppleSeeds APPLE_SEEDS;
 	public static BlockSaplingApple APPLE_SAPLING;
@@ -365,8 +369,27 @@ public class ModBlocks {
 		};
 		ROPE = new BlockRope("rope");
 		STAKE_TIED = new BlockStakeTied();
-		GRAPE_STEM = new BlockGrapeStem();
-		GRAPE_LEAVES = new BlockGrapeLeaves();
+		GRAPE_LEAVES = new BlockGrapeLeaves("grape_leaves"){
+			@Override
+			public Item grapeSpecies() {
+				return ModItems.GRAPES;
+			}
+		};
+		GRAPE_STEM = new BlockGrapeStem("grape_stem", GRAPE_LEAVES);
+		GRAPE_LEAVES_RED = new BlockGrapeLeaves("grape_leaves_red"){
+			@Override
+			public Item grapeSpecies() {
+				return ModItems.GRAPES_RED;
+			}
+		};
+		GRAPE_STEM_RED = new BlockGrapeStem("grape_stem_red", GRAPE_LEAVES_RED);
+		GRAPE_LEAVES_GREEN = new BlockGrapeLeaves("grape_leaves_green"){
+			@Override
+			public Item grapeSpecies() {
+				return ModItems.GRAPES_GREEN;
+			}
+		};
+		GRAPE_STEM_GREEN = new BlockGrapeStem("grape_stem_green", GRAPE_LEAVES_GREEN);
 		BREWING_BARREL = new BlockBrewingBarrel();
 		APPLE_SEEDS = new BlockAppleSeeds();
 		APPLE_SAPLING = new BlockSaplingApple();
@@ -516,6 +539,10 @@ public class ModBlocks {
 		ROPE.initModel();
 		GRAPE_STEM.initModel();
 		GRAPE_LEAVES.initModel();
+		GRAPE_STEM_RED.initModel();
+		GRAPE_LEAVES_RED.initModel();
+		GRAPE_STEM_GREEN.initModel();
+		GRAPE_LEAVES_GREEN.initModel();
 		BREWING_BARREL.initModel();
 		APPLE_SEEDS.initModel();
 		APPLE_SAPLING.initModel();
